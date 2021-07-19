@@ -1,3 +1,5 @@
+from os import environ
+
 """
 Django settings for restapi project.
 
@@ -20,10 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ena-p&54%w-wlykkw+4lk-1c*$w#ywx**ro*iu!oi(xjs_@^%c'
-
+SECRET_KEY = environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = environ['DEBUG_MODE']
 
 ALLOWED_HOSTS = []
 
