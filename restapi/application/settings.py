@@ -22,9 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = environ['SECRET_KEY']
+SECRET_KEY = '1234'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = environ['DEBUG_MODE']
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -52,7 +52,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'restapi.urls'
+ROOT_URLCONF = 'pharmacy.urls'
 
 TEMPLATES = [
     {
@@ -70,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'restapi.wsgi.application'
+WSGI_APPLICATION = 'application.wsgi.application'
 
 
 # Database
@@ -81,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'medicaments',
         'USER' : 'mishail',
-        'PASSWORD' : '1234',
+        'PASSWORD' : '1204',
         'HOST' : '127.0.0.1',
         'PORT' : '5432',
     }
