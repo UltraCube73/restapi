@@ -1,5 +1,6 @@
 from rest_framework.generics import get_object_or_404
 from .serialisers import MedicationSerialiser, PharmacySerialiser
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Pharmacy, Medication
@@ -18,14 +19,14 @@ class MedicationView(APIView):
             medications = Medication.objects.all()
             serialiser = MedicationSerialiser(medications, many=True)
 
-        return Response({'medications': serialiser.data})
+        return Response({'medications': serialiser.data}, status=status.HTTP_200_OK)
 
     def post(self, request):
         medication = request.data.get('medication')
         serialiser = MedicationSerialiser(data=medication)
         if serialiser.is_valid(raise_exception=True):
             serialiser.save()
-        return Response({'ok': 'Medication created successfully'})
+        return Response({'ok': 'Medication created successfully'}, status=status.HTTP_201_CREATED)
 
     def put(self, request):
         medication_saved = get_object_or_404(Medication.objects.all(), pk=request.GET.get('id'))
@@ -33,7 +34,7 @@ class MedicationView(APIView):
         serialiser = MedicationSerialiser(instance=medication_saved, data=data, partial=True)
         if serialiser.is_valid(raise_exception=True):
             serialiser.save()
-        return Response({'ok': 'Medication updated successfully'})
+        return Response({'ok': 'Medication updated successfully'}, status=status.HTTP_201_CREATED)
 
 
 class PharmacyView(APIView):
@@ -45,5 +46,5 @@ class PharmacyView(APIView):
             pharmacies = Pharmacy.objects.all()
         serialiser = PharmacySerialiser(pharmacies, many=True)
 
-        return Response({"pharmacies": serialiser.data})
+        return Response({"pharmacies": serialiser.data}, status=status.HTTP_200_OK)
 
