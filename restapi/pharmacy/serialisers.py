@@ -2,13 +2,19 @@ from rest_framework import serializers
 
 from .models import Medication
 
-class MedicationSerialiser(serializers.Serializer):
+class MedicationSerializer(serializers.ModelSerializer):
     m_name = serializers.CharField(max_length=30)
     m_manufacuter_city = serializers.CharField(max_length=20)
     m_price = serializers.IntegerField()
     m_pharmacy_id = serializers.IntegerField()
+    
+    class Meta:
+        model = Medication
+        fields = '__all__'
+        
     def create(self, validated_data):
         return Medication.objects.create(**validated_data)
+    
     def update(self, instance, validated_data):
         instance.m_name = validated_data.get('m_name', instance.m_name)
         instance.m_manufacuter_city = validated_data.get('m_manufacuter_city', instance.m_manufacuter_city)
